@@ -1,0 +1,220 @@
+{
+  "name": "Prueba_tecnica",
+  "nodes": [
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "JSDevs Reunión",
+        "emailType": "text",
+        "message": "=Hola {{ $json['First name'] }} {{ $json['Last name'] }},\n\nGracias por confiar en JSDevs. Me alegra saber de tu interés y estoy seguro de que podemos ayudarte a encontrar una solución que marque una diferencia real en tu vida.\n\nTe invito a agendar una breve reunión conmigo para conversar sobre tus necesidades y cómo podemos apoyarte en alcanzar tus objetivos.\nSolo haz clic en el siguiente enlace y elige el momento que mejor te convenga:\n\n👉 https://cal.com/jesus-serpa-s1p5ia\n\nQuedo atento a tu confirmación. ¡Será un gusto hablar contigo!\n\nUn cordial saludo,\nJesús Serpa\nCEO – JSDevs",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        220,
+        0
+      ],
+      "id": "a5923e85-ac9e-4fc0-89ce-aaa7e98492ca",
+      "name": "enviar_correo",
+      "webhookId": "5b7aa622-2801-47b8-a6e6-0cff5faeac83",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "BcGMUWeUS2CZpGvL",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "12tpTq5gdBHJWFRyFviYHHfox46bTnBWaTo96hmUaoyA",
+          "mode": "list",
+          "cachedResultName": "JSDevs",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/12tpTq5gdBHJWFRyFviYHHfox46bTnBWaTo96hmUaoyA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/12tpTq5gdBHJWFRyFviYHHfox46bTnBWaTo96hmUaoyA/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Nombre": "={{ $('Agendamiento_citas').item.json.attendees[0].name }}",
+            "Correo ": "={{ $('Agendamiento_citas').item.json.attendees[0].email }}",
+            "Fase": "Agendado"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Fase",
+              "displayName": "Fase",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Correo ",
+              "displayName": "Correo ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        380,
+        260
+      ],
+      "id": "82494ba7-5957-498a-b811-add7455cce2f",
+      "name": "JSDevs_DB",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "oPQGuCU2wOY8Wfxs",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.attendees[0].email }}",
+        "subject": "Confirmación reunión JSDevs",
+        "message": "=Hola! {{ $json.attendees[0].name }}\n<br>\n<br>\nTe recuerdo que nos veremos el día:\n{{ $json.startTime.toDateTime().format('yyyy-MM-dd') }}.\n<br>\nSaludos,\n<br>\n<br>\n\nJesus Serpa, \nCEO JSDevs",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        180,
+        260
+      ],
+      "id": "f208f2c5-1a07-4625-a5dd-faef4affdf41",
+      "name": "Confirm_Reunion",
+      "webhookId": "a4321cbc-8db8-43c7-9c34-2d5bbd12e864",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "BcGMUWeUS2CZpGvL",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "formId": "iYfrqVj6"
+      },
+      "type": "n8n-nodes-base.typeformTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        60,
+        0
+      ],
+      "id": "4d0af1a5-bd46-4b8f-9739-dd5425246bf2",
+      "name": "Formulario",
+      "webhookId": "51598422-a029-41e7-9bdf-a1c1604ea051",
+      "credentials": {
+        "typeformApi": {
+          "id": "pIMwjYyTdPAWj3mH",
+          "name": "Typeform account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "events": [
+          "BOOKING_CREATED"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.calTrigger",
+      "typeVersion": 2,
+      "position": [
+        0,
+        260
+      ],
+      "id": "58b8dfbb-25d9-4ec2-98e6-26dc01bc4cc1",
+      "name": "Agendamiento_citas",
+      "webhookId": "58f35981-aa2e-4d38-a3ac-93394fd34ec5",
+      "credentials": {
+        "calApi": {
+          "id": "eKDsXck07Y3AGbzr",
+          "name": "Cal account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Confirm_Reunion": {
+      "main": [
+        [
+          {
+            "node": "JSDevs_DB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formulario": {
+      "main": [
+        [
+          {
+            "node": "enviar_correo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agendamiento_citas": {
+      "main": [
+        [
+          {
+            "node": "Confirm_Reunion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1b6f492e-26c6-4e02-a1e0-5dc88240f21c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "5fc4c0fb76fb29085e07eb0447de5e30b74489ec3459b5fda621a16a7eeca756"
+  },
+  "id": "P5lzqZORpKfVKqLB",
+  "tags": []
+}
