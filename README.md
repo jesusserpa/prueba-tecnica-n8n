@@ -55,14 +55,6 @@ Mira el funcionamiento completo del flujo en este video:
 Puedes visitar la landing page creada para este flujo en:
 
 🔗 https://js-devs-co.netlify.app/
-
-
-📂 Estructura del Repositorio
-
-prueba-tecnica-n8n/
-├── README.md
-├── workflows/
-    └── flujo-agencia.json         # Exportación del flujo de n8n
     
 
 ✅ Criterios Técnicos Cubiertos
