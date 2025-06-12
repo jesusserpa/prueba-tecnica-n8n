@@ -47,7 +47,7 @@ Cuando el cliente agenda una reunión usando Cal.com, se activa un nuevo evento 
 🎥 Video Explicativo
 Mira el funcionamiento completo del flujo en este video:
 
-🔗 https://youtu.be/Nxd1xYBx67s
+🔗 [https://youtu.be/Nxd1xYBx67s](https://drive.google.com/file/d/1klTvr4yfxF8elqJgDpXRgFWMR9scEFOm/view?usp=sharing)
 
 
 🌐 JSDevs – Landing Page del Proyecto
