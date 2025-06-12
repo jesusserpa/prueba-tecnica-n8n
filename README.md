@@ -42,6 +42,7 @@ Cuando el cliente agenda una reunión usando Cal.com, se activa un nuevo evento 
 
 ![image](https://github.com/user-attachments/assets/f8e87709-36f9-4ba7-95ba-cb30a0d84c8c)
 
+EL ARCHIVO EXPORTADO DE N8N, SE ENCUENTRA EN LA CARPETA LLAMADA WORKFLOW
 
 
 🎥 Video Explicativo
